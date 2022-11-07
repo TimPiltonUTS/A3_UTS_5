@@ -1,0 +1,1341 @@
+from python import python
+from typing import List, Optional, Union
+from datetime import datetime
+
+
+class DevicelayoutSize:
+    maxheight: int
+    minheight: int
+    sizing_mode: str
+
+    def __init__(self, maxheight: int, minheight: int, sizing_mode: str) -> None:
+        self.maxheight = maxheight
+        self.minheight = minheight
+        self.sizing_mode = sizing_mode
+
+
+class ButtonType(Enum):
+    BITMAP = "bitmap"
+    DASHBOARD_OBJECT = "dashboard-object"
+    TEXT = "text"
+
+
+class Fontcolor(Enum):
+    FFFFFF = "#ffffff"
+
+
+class Fontname(Enum):
+    TABLEAU_BOLD = "Tableau Bold"
+
+
+class ButtonCaptionFontStyle:
+    fontcolor: Fontcolor
+    fontname: Fontname
+    fontsize: int
+
+    def __init__(self, fontcolor: Fontcolor, fontname: Fontname, fontsize: int) -> None:
+        self.fontcolor = fontcolor
+        self.fontname = fontname
+        self.fontsize = fontsize
+
+
+class Name(Enum):
+    ASSISTS = "Assists"
+    BLOCKS = "Blocks"
+    HOME = "HOME"
+    MAIN_DASHBOARD = "Main dashboard"
+    POINTS = "Points"
+    REBOUNDS = "Rebounds"
+    STEALS = "Steals"
+
+
+class FcpAnimationOnByDefaultFalseFormatElement:
+    attr: str
+    value: str
+
+    def __init__(self, attr: str, value: str) -> None:
+        self.attr = attr
+        self.value = value
+
+
+class ButtonVisualStateClass:
+    caption: Name
+    button_caption_font_style: ButtonCaptionFontStyle
+    format: FcpAnimationOnByDefaultFalseFormatElement
+
+    def __init__(self, caption: Name, button_caption_font_style: ButtonCaptionFontStyle, format: FcpAnimationOnByDefaultFalseFormatElement) -> None:
+        self.caption = caption
+        self.button_caption_font_style = button_caption_font_style
+        self.format = format
+
+
+class PurpleButton:
+    button_visual_state: ButtonVisualStateClass
+    action: str
+    button_type: ButtonType
+
+    def __init__(self, button_visual_state: ButtonVisualStateClass, action: str, button_type: ButtonType) -> None:
+        self.button_visual_state = button_visual_state
+        self.action = action
+        self.button_type = button_type
+
+
+class FormattedTextRunClass:
+    fontalignment: int
+    fontcolor: str
+    fontname: str
+    fontsize: int
+    text: str
+
+    def __init__(self, fontalignment: int, fontcolor: str, fontname: str, fontsize: int, text: str) -> None:
+        self.fontalignment = fontalignment
+        self.fontcolor = fontcolor
+        self.fontname = fontname
+        self.fontsize = fontsize
+        self.text = text
+
+
+class ZoneFormattedText:
+    run: FormattedTextRunClass
+
+    def __init__(self, run: FormattedTextRunClass) -> None:
+        self.run = run
+
+
+class ZoneStyle:
+    format: List[FcpAnimationOnByDefaultFalseFormatElement]
+
+    def __init__(self, format: List[FcpAnimationOnByDefaultFalseFormatElement]) -> None:
+        self.format = format
+
+
+class TentacledZone:
+    zone_style: ZoneStyle
+    fixed_size: Optional[int]
+    h: int
+    id: int
+    is_centered: Optional[int]
+    is_fixed: Optional[bool]
+    param: Optional[str]
+    type_v2: Optional[ButtonType]
+    w: int
+    x: int
+    y: int
+    formatted_text: Optional[ZoneFormattedText]
+    force_update: Optional[bool]
+    button: Optional[PurpleButton]
+    name: Optional[str]
+
+    def __init__(self, zone_style: ZoneStyle, fixed_size: Optional[int], h: int, id: int, is_centered: Optional[int], is_fixed: Optional[bool], param: Optional[str], type_v2: Optional[ButtonType], w: int, x: int, y: int, formatted_text: Optional[ZoneFormattedText], force_update: Optional[bool], button: Optional[PurpleButton], name: Optional[str]) -> None:
+        self.zone_style = zone_style
+        self.fixed_size = fixed_size
+        self.h = h
+        self.id = id
+        self.is_centered = is_centered
+        self.is_fixed = is_fixed
+        self.param = param
+        self.type_v2 = type_v2
+        self.w = w
+        self.x = x
+        self.y = y
+        self.formatted_text = formatted_text
+        self.force_update = force_update
+        self.button = button
+        self.name = name
+
+
+class FluffyZone:
+    zone: List[TentacledZone]
+    h: int
+    id: int
+    param: str
+    type_v2: str
+    w: int
+    x: int
+    y: int
+
+    def __init__(self, zone: List[TentacledZone], h: int, id: int, param: str, type_v2: str, w: int, x: int, y: int) -> None:
+        self.zone = zone
+        self.h = h
+        self.id = id
+        self.param = param
+        self.type_v2 = type_v2
+        self.w = w
+        self.x = x
+        self.y = y
+
+
+class PurpleZone:
+    zone: Optional[FluffyZone]
+    zone_style: ZoneStyle
+    h: int
+    id: int
+    type_v2: str
+    w: int
+    x: int
+    y: int
+    is_centered: Optional[int]
+    param: Optional[str]
+
+    def __init__(self, zone: Optional[FluffyZone], zone_style: ZoneStyle, h: int, id: int, type_v2: str, w: int, x: int, y: int, is_centered: Optional[int], param: Optional[str]) -> None:
+        self.zone = zone
+        self.zone_style = zone_style
+        self.h = h
+        self.id = id
+        self.type_v2 = type_v2
+        self.w = w
+        self.x = x
+        self.y = y
+        self.is_centered = is_centered
+        self.param = param
+
+
+class DevicelayoutZones:
+    zone: PurpleZone
+
+    def __init__(self, zone: PurpleZone) -> None:
+        self.zone = zone
+
+
+class Devicelayout:
+    size: DevicelayoutSize
+    zones: DevicelayoutZones
+    auto_generated: bool
+    name: str
+
+    def __init__(self, size: DevicelayoutSize, zones: DevicelayoutZones, auto_generated: bool, name: str) -> None:
+        self.size = size
+        self.zones = zones
+        self.auto_generated = auto_generated
+        self.name = name
+
+
+class Devicelayouts:
+    devicelayout: Devicelayout
+
+    def __init__(self, devicelayout: Devicelayout) -> None:
+        self.devicelayout = devicelayout
+
+
+class SimpleID:
+    uuid: str
+
+    def __init__(self, uuid: str) -> None:
+        self.uuid = uuid
+
+
+class DashboardSize:
+    maxheight: int
+    maxwidth: int
+    minheight: int
+    minwidth: int
+    preset_index: Optional[int]
+    sizing_mode: Optional[str]
+
+    def __init__(self, maxheight: int, maxwidth: int, minheight: int, minwidth: int, preset_index: Optional[int], sizing_mode: Optional[str]) -> None:
+        self.maxheight = maxheight
+        self.maxwidth = maxwidth
+        self.minheight = minheight
+        self.minwidth = minwidth
+        self.preset_index = preset_index
+        self.sizing_mode = sizing_mode
+
+
+class FluffyButton:
+    button_visual_state: Union[List[str], ButtonVisualStateClass]
+    action: str
+    button_type: Optional[ButtonType]
+    toggle_action: Optional[str]
+
+    def __init__(self, button_visual_state: Union[List[str], ButtonVisualStateClass], action: str, button_type: Optional[ButtonType], toggle_action: Optional[str]) -> None:
+        self.button_visual_state = button_visual_state
+        self.action = action
+        self.button_type = button_type
+        self.toggle_action = toggle_action
+
+
+class TypeV2(Enum):
+    DASHBOARD_OBJECT = "dashboard-object"
+    LAYOUT_BASIC = "layout-basic"
+    TEXT = "text"
+
+
+class StickyZone:
+    zone: Optional[PurpleZone]
+    zone_style: Optional[ZoneStyle]
+    h: int
+    id: int
+    type_v2: Optional[TypeV2]
+    w: int
+    x: int
+    y: int
+    formatted_text: Optional[ZoneFormattedText]
+    force_update: Optional[bool]
+    button: Optional[FluffyButton]
+    name: Optional[str]
+
+    def __init__(self, zone: Optional[PurpleZone], zone_style: Optional[ZoneStyle], h: int, id: int, type_v2: Optional[TypeV2], w: int, x: int, y: int, formatted_text: Optional[ZoneFormattedText], force_update: Optional[bool], button: Optional[FluffyButton], name: Optional[str]) -> None:
+        self.zone = zone
+        self.zone_style = zone_style
+        self.h = h
+        self.id = id
+        self.type_v2 = type_v2
+        self.w = w
+        self.x = x
+        self.y = y
+        self.formatted_text = formatted_text
+        self.force_update = force_update
+        self.button = button
+        self.name = name
+
+
+class DashboardZones:
+    zone: List[StickyZone]
+
+    def __init__(self, zone: List[StickyZone]) -> None:
+        self.zone = zone
+
+
+class Dashboard:
+    style: str
+    size: DashboardSize
+    zones: DashboardZones
+    devicelayouts: Optional[Devicelayouts]
+    simple_id: SimpleID
+    fcp_accessible_zone_tab_order_true_enable_sort_zone_taborder: bool
+    name: Name
+
+    def __init__(self, style: str, size: DashboardSize, zones: DashboardZones, devicelayouts: Optional[Devicelayouts], simple_id: SimpleID, fcp_accessible_zone_tab_order_true_enable_sort_zone_taborder: bool, name: Name) -> None:
+        self.style = style
+        self.size = size
+        self.zones = zones
+        self.devicelayouts = devicelayouts
+        self.simple_id = simple_id
+        self.fcp_accessible_zone_tab_order_true_enable_sort_zone_taborder = fcp_accessible_zone_tab_order_true_enable_sort_zone_taborder
+        self.name = name
+
+
+class Dashboards:
+    dashboard: List[Dashboard]
+
+    def __init__(self, dashboard: List[Dashboard]) -> None:
+        self.dashboard = dashboard
+
+
+class Aliases:
+    enabled: str
+
+    def __init__(self, enabled: str) -> None:
+        self.enabled = enabled
+
+
+class LocalTypeEnum(Enum):
+    INTEGER = "integer"
+    REAL = "real"
+    STRING = "string"
+
+
+class ColumnsColumn:
+    datatype: LocalTypeEnum
+    name: str
+    ordinal: int
+
+    def __init__(self, datatype: LocalTypeEnum, name: str, ordinal: int) -> None:
+        self.datatype = datatype
+        self.name = name
+        self.ordinal = ordinal
+
+
+class FcpObjectModelEncapsulateLegacyFalseRelationColumns:
+    column: List[ColumnsColumn]
+    character_set: str
+    header: str
+    locale: str
+    separator: str
+
+    def __init__(self, column: List[ColumnsColumn], character_set: str, header: str, locale: str, separator: str) -> None:
+        self.column = column
+        self.character_set = character_set
+        self.header = header
+        self.locale = locale
+        self.separator = separator
+
+
+class FcpObjectModelEncapsulateLegacyFalseRelationDatatype(Enum):
+    REAL = "real"
+    STRING = "string"
+    TABLE = "table"
+
+
+class Relation:
+    columns: Optional[FcpObjectModelEncapsulateLegacyFalseRelationColumns]
+    connection: Optional[str]
+    name: str
+    table: str
+    type: FcpObjectModelEncapsulateLegacyFalseRelationDatatype
+
+    def __init__(self, columns: Optional[FcpObjectModelEncapsulateLegacyFalseRelationColumns], connection: Optional[str], name: str, table: str, type: FcpObjectModelEncapsulateLegacyFalseRelationDatatype) -> None:
+        self.columns = columns
+        self.connection = connection
+        self.name = name
+        self.table = table
+        self.type = type
+
+
+class AggregationEnum(Enum):
+    COUNT = "Count"
+    SUM = "Sum"
+
+
+class Attribute:
+    datatype: LocalTypeEnum
+    name: str
+    text: str
+
+    def __init__(self, datatype: LocalTypeEnum, name: str, text: str) -> None:
+        self.datatype = datatype
+        self.name = name
+        self.text = text
+
+
+class Attributes:
+    attribute: List[Attribute]
+
+    def __init__(self, attribute: List[Attribute]) -> None:
+        self.attribute = attribute
+
+
+class Collation:
+    flag: int
+    name: str
+
+    def __init__(self, flag: int, name: str) -> None:
+        self.flag = flag
+        self.name = name
+
+
+class Caption(Enum):
+    THE_20212022_NBA_PLAYER_STATS_PLAYOFFS_CSV = "2021-2022 NBA Player Stats - Playoffs.csv"
+
+
+class MetadataRecordClass(Enum):
+    CAPABILITY = "capability"
+    COLUMN = "column"
+
+
+class ParentName(Enum):
+    EXTRACT = "[Extract]"
+    THE_20212022_NBA_PLAYER_STATS_PLAYOFFS_CSV = "[2021-2022 NBA Player Stats - Playoffs.csv]"
+
+
+class MetadataRecord:
+    remote_name: str
+    remote_type: int
+    parent_name: ParentName
+    remote_alias: str
+    aggregation: AggregationEnum
+    contains_null: bool
+    attributes: Optional[Attributes]
+    metadata_record_class: MetadataRecordClass
+    local_name: Optional[str]
+    ordinal: Optional[int]
+    local_type: Optional[LocalTypeEnum]
+    fcp_object_model_encapsulate_legacy_true_object_id: Optional[str]
+    scale: Optional[int]
+    width: Optional[int]
+    collation: Optional[Collation]
+    family: Optional[Caption]
+    approx_count: Optional[int]
+
+    def __init__(self, remote_name: str, remote_type: int, parent_name: ParentName, remote_alias: str, aggregation: AggregationEnum, contains_null: bool, attributes: Optional[Attributes], metadata_record_class: MetadataRecordClass, local_name: Optional[str], ordinal: Optional[int], local_type: Optional[LocalTypeEnum], fcp_object_model_encapsulate_legacy_true_object_id: Optional[str], scale: Optional[int], width: Optional[int], collation: Optional[Collation], family: Optional[Caption], approx_count: Optional[int]) -> None:
+        self.remote_name = remote_name
+        self.remote_type = remote_type
+        self.parent_name = parent_name
+        self.remote_alias = remote_alias
+        self.aggregation = aggregation
+        self.contains_null = contains_null
+        self.attributes = attributes
+        self.metadata_record_class = metadata_record_class
+        self.local_name = local_name
+        self.ordinal = ordinal
+        self.local_type = local_type
+        self.fcp_object_model_encapsulate_legacy_true_object_id = fcp_object_model_encapsulate_legacy_true_object_id
+        self.scale = scale
+        self.width = width
+        self.collation = collation
+        self.family = family
+        self.approx_count = approx_count
+
+
+class MetadataRecords:
+    metadata_record: List[MetadataRecord]
+
+    def __init__(self, metadata_record: List[MetadataRecord]) -> None:
+        self.metadata_record = metadata_record
+
+
+class NamedConnectionConnection:
+    connection_class: str
+    directory: str
+    filename: Caption
+    password: str
+    server: str
+
+    def __init__(self, connection_class: str, directory: str, filename: Caption, password: str, server: str) -> None:
+        self.connection_class = connection_class
+        self.directory = directory
+        self.filename = filename
+        self.password = password
+        self.server = server
+
+
+class NamedConnection:
+    connection: NamedConnectionConnection
+    caption: str
+    name: str
+
+    def __init__(self, connection: NamedConnectionConnection, caption: str, name: str) -> None:
+        self.connection = connection
+        self.caption = caption
+        self.name = name
+
+
+class NamedConnections:
+    named_connection: NamedConnection
+
+    def __init__(self, named_connection: NamedConnection) -> None:
+        self.named_connection = named_connection
+
+
+class DatasourceConnection:
+    named_connections: NamedConnections
+    fcp_object_model_encapsulate_legacy_false_relation: Relation
+    fcp_object_model_encapsulate_legacy_true_relation: Relation
+    metadata_records: MetadataRecords
+    connection_class: str
+
+    def __init__(self, named_connections: NamedConnections, fcp_object_model_encapsulate_legacy_false_relation: Relation, fcp_object_model_encapsulate_legacy_true_relation: Relation, metadata_records: MetadataRecords, connection_class: str) -> None:
+        self.named_connections = named_connections
+        self.fcp_object_model_encapsulate_legacy_false_relation = fcp_object_model_encapsulate_legacy_false_relation
+        self.fcp_object_model_encapsulate_legacy_true_relation = fcp_object_model_encapsulate_legacy_true_relation
+        self.metadata_records = metadata_records
+        self.connection_class = connection_class
+
+
+class DateOptions:
+    start_of_week: str
+
+    def __init__(self, start_of_week: str) -> None:
+        self.start_of_week = start_of_week
+
+
+class FcpObjectModelEncapsulateLegacyERelation:
+    name: str
+    table: str
+    type: FcpObjectModelEncapsulateLegacyFalseRelationDatatype
+
+    def __init__(self, name: str, table: str, type: FcpObjectModelEncapsulateLegacyFalseRelationDatatype) -> None:
+        self.name = name
+        self.table = table
+        self.type = type
+
+
+class RefreshEvent:
+    add_from_file_path: str
+    increment_value: str
+    refresh_type: str
+    rows_inserted: int
+    timestamp_start: datetime
+
+    def __init__(self, add_from_file_path: str, increment_value: str, refresh_type: str, rows_inserted: int, timestamp_start: datetime) -> None:
+        self.add_from_file_path = add_from_file_path
+        self.increment_value = increment_value
+        self.refresh_type = refresh_type
+        self.rows_inserted = rows_inserted
+        self.timestamp_start = timestamp_start
+
+
+class Refresh:
+    refresh_event: RefreshEvent
+
+    def __init__(self, refresh_event: RefreshEvent) -> None:
+        self.refresh_event = refresh_event
+
+
+class ExtractConnection:
+    fcp_object_model_encapsulate_legacy_false_relation: FcpObjectModelEncapsulateLegacyERelation
+    fcp_object_model_encapsulate_legacy_true_relation: FcpObjectModelEncapsulateLegacyERelation
+    refresh: Refresh
+    metadata_records: MetadataRecords
+    access_mode: str
+    authentication: str
+    author_locale: str
+    connection_class: str
+    dbname: str
+    default_settings: str
+    schema: str
+    sslmode: str
+    tablename: str
+    update_time: str
+    username: str
+
+    def __init__(self, fcp_object_model_encapsulate_legacy_false_relation: FcpObjectModelEncapsulateLegacyERelation, fcp_object_model_encapsulate_legacy_true_relation: FcpObjectModelEncapsulateLegacyERelation, refresh: Refresh, metadata_records: MetadataRecords, access_mode: str, authentication: str, author_locale: str, connection_class: str, dbname: str, default_settings: str, schema: str, sslmode: str, tablename: str, update_time: str, username: str) -> None:
+        self.fcp_object_model_encapsulate_legacy_false_relation = fcp_object_model_encapsulate_legacy_false_relation
+        self.fcp_object_model_encapsulate_legacy_true_relation = fcp_object_model_encapsulate_legacy_true_relation
+        self.refresh = refresh
+        self.metadata_records = metadata_records
+        self.access_mode = access_mode
+        self.authentication = authentication
+        self.author_locale = author_locale
+        self.connection_class = connection_class
+        self.dbname = dbname
+        self.default_settings = default_settings
+        self.schema = schema
+        self.sslmode = sslmode
+        self.tablename = tablename
+        self.update_time = update_time
+        self.username = username
+
+
+class Extract:
+    connection: ExtractConnection
+    fcp_object_model_extract_v2_true_object_id: str
+    count: int
+    enabled: bool
+    units: str
+
+    def __init__(self, connection: ExtractConnection, fcp_object_model_extract_v2_true_object_id: str, count: int, enabled: bool, units: str) -> None:
+        self.connection = connection
+        self.fcp_object_model_extract_v2_true_object_id = fcp_object_model_extract_v2_true_object_id
+        self.count = count
+        self.enabled = enabled
+        self.units = units
+
+
+class Property:
+    relation: Relation
+    context: str
+
+    def __init__(self, relation: Relation, context: str) -> None:
+        self.relation = relation
+        self.context = context
+
+
+class Object:
+    properties: List[Property]
+    caption: Caption
+    id: str
+
+    def __init__(self, properties: List[Property], caption: Caption, id: str) -> None:
+        self.properties = properties
+        self.caption = caption
+        self.id = id
+
+
+class Objects:
+    object: Object
+
+    def __init__(self, object: Object) -> None:
+        self.object = object
+
+
+class FcpObjectModelEncapsulateLegacyTrueObjectGraph:
+    objects: Objects
+
+    def __init__(self, objects: Objects) -> None:
+        self.objects = objects
+
+
+class Role(Enum):
+    DIMENSION = "dimension"
+    MEASURE = "measure"
+
+
+class FieldTypeEnum(Enum):
+    NOMINAL = "nominal"
+    QUANTITATIVE = "quantitative"
+
+
+class FcpObjectModelTableTypeTrueColumnElement:
+    caption: Optional[Caption]
+    datatype: FcpObjectModelEncapsulateLegacyFalseRelationDatatype
+    name: str
+    role: Role
+    type: FieldTypeEnum
+
+    def __init__(self, caption: Optional[Caption], datatype: FcpObjectModelEncapsulateLegacyFalseRelationDatatype, name: str, role: Role, type: FieldTypeEnum) -> None:
+        self.caption = caption
+        self.datatype = datatype
+        self.name = name
+        self.role = role
+        self.type = type
+
+
+class Layout:
+    fcp_schema_viewer_object_model_false_dim_percentage: str
+    fcp_schema_viewer_object_model_false_measure_percentage: str
+    dim_ordering: str
+    measure_ordering: str
+    show_structure: bool
+
+    def __init__(self, fcp_schema_viewer_object_model_false_dim_percentage: str, fcp_schema_viewer_object_model_false_measure_percentage: str, dim_ordering: str, measure_ordering: str, show_structure: bool) -> None:
+        self.fcp_schema_viewer_object_model_false_dim_percentage = fcp_schema_viewer_object_model_false_dim_percentage
+        self.fcp_schema_viewer_object_model_false_measure_percentage = fcp_schema_viewer_object_model_false_measure_percentage
+        self.dim_ordering = dim_ordering
+        self.measure_ordering = measure_ordering
+        self.show_structure = show_structure
+
+
+class SemanticValue:
+    key: str
+    value: str
+
+    def __init__(self, key: str, value: str) -> None:
+        self.key = key
+        self.value = value
+
+
+class SemanticValues:
+    semantic_value: SemanticValue
+
+    def __init__(self, semantic_value: SemanticValue) -> None:
+        self.semantic_value = semantic_value
+
+
+class PurpleDatasource:
+    connection: DatasourceConnection
+    aliases: Aliases
+    fcp_object_model_table_type_true_column: FcpObjectModelTableTypeTrueColumnElement
+    extract: Extract
+    layout: Layout
+    semantic_values: SemanticValues
+    date_options: DateOptions
+    fcp_object_model_encapsulate_legacy_true_object_graph: FcpObjectModelEncapsulateLegacyTrueObjectGraph
+    caption: str
+    inline: bool
+    name: str
+    version: str
+
+    def __init__(self, connection: DatasourceConnection, aliases: Aliases, fcp_object_model_table_type_true_column: FcpObjectModelTableTypeTrueColumnElement, extract: Extract, layout: Layout, semantic_values: SemanticValues, date_options: DateOptions, fcp_object_model_encapsulate_legacy_true_object_graph: FcpObjectModelEncapsulateLegacyTrueObjectGraph, caption: str, inline: bool, name: str, version: str) -> None:
+        self.connection = connection
+        self.aliases = aliases
+        self.fcp_object_model_table_type_true_column = fcp_object_model_table_type_true_column
+        self.extract = extract
+        self.layout = layout
+        self.semantic_values = semantic_values
+        self.date_options = date_options
+        self.fcp_object_model_encapsulate_legacy_true_object_graph = fcp_object_model_encapsulate_legacy_true_object_graph
+        self.caption = caption
+        self.inline = inline
+        self.name = name
+        self.version = version
+
+
+class WorkbookDatasources:
+    datasource: PurpleDatasource
+
+    def __init__(self, datasource: PurpleDatasource) -> None:
+        self.datasource = datasource
+
+
+class DocumentFormatChangeManifest:
+    fcp_accessible_zone_tab_order_true_accessible_zone_tab_order: str
+    fcp_animation_on_by_default_true_animation_on_by_default: str
+    auto_create_and_update_dsd_phone_layouts: str
+    basic_button_object: str
+    basic_button_object_text_support: str
+    collapsible_pane: str
+    intuitive_sorting: str
+    intuitive_sorting_sp2: str
+    fcp_mark_animation_true_mark_animation: str
+    fcp_object_model_encapsulate_legacy_true_object_model_encapsulate_legacy: str
+    fcp_object_model_extract_v2_true_object_model_extract_v2: str
+    fcp_object_model_table_type_true_object_model_table_type: str
+    fcp_schema_viewer_object_model_true_schema_viewer_object_model: str
+    set_membership_control: str
+    sheet_identifier_tracking: str
+    windows_persist_simple_identifiers: str
+    worksheet_background_transparency: str
+
+    def __init__(self, fcp_accessible_zone_tab_order_true_accessible_zone_tab_order: str, fcp_animation_on_by_default_true_animation_on_by_default: str, auto_create_and_update_dsd_phone_layouts: str, basic_button_object: str, basic_button_object_text_support: str, collapsible_pane: str, intuitive_sorting: str, intuitive_sorting_sp2: str, fcp_mark_animation_true_mark_animation: str, fcp_object_model_encapsulate_legacy_true_object_model_encapsulate_legacy: str, fcp_object_model_extract_v2_true_object_model_extract_v2: str, fcp_object_model_table_type_true_object_model_table_type: str, fcp_schema_viewer_object_model_true_schema_viewer_object_model: str, set_membership_control: str, sheet_identifier_tracking: str, windows_persist_simple_identifiers: str, worksheet_background_transparency: str) -> None:
+        self.fcp_accessible_zone_tab_order_true_accessible_zone_tab_order = fcp_accessible_zone_tab_order_true_accessible_zone_tab_order
+        self.fcp_animation_on_by_default_true_animation_on_by_default = fcp_animation_on_by_default_true_animation_on_by_default
+        self.auto_create_and_update_dsd_phone_layouts = auto_create_and_update_dsd_phone_layouts
+        self.basic_button_object = basic_button_object
+        self.basic_button_object_text_support = basic_button_object_text_support
+        self.collapsible_pane = collapsible_pane
+        self.intuitive_sorting = intuitive_sorting
+        self.intuitive_sorting_sp2 = intuitive_sorting_sp2
+        self.fcp_mark_animation_true_mark_animation = fcp_mark_animation_true_mark_animation
+        self.fcp_object_model_encapsulate_legacy_true_object_model_encapsulate_legacy = fcp_object_model_encapsulate_legacy_true_object_model_encapsulate_legacy
+        self.fcp_object_model_extract_v2_true_object_model_extract_v2 = fcp_object_model_extract_v2_true_object_model_extract_v2
+        self.fcp_object_model_table_type_true_object_model_table_type = fcp_object_model_table_type_true_object_model_table_type
+        self.fcp_schema_viewer_object_model_true_schema_viewer_object_model = fcp_schema_viewer_object_model_true_schema_viewer_object_model
+        self.set_membership_control = set_membership_control
+        self.sheet_identifier_tracking = sheet_identifier_tracking
+        self.windows_persist_simple_identifiers = windows_persist_simple_identifiers
+        self.worksheet_background_transparency = worksheet_background_transparency
+
+
+class FcpAnimationOnByDefaultFalseFcpMarkAnimationTrueStyleRule:
+    fcp_animation_on_by_default_false_format: FcpAnimationOnByDefaultFalseFormatElement
+    element: str
+
+    def __init__(self, fcp_animation_on_by_default_false_format: FcpAnimationOnByDefaultFalseFormatElement, element: str) -> None:
+        self.fcp_animation_on_by_default_false_format = fcp_animation_on_by_default_false_format
+        self.element = element
+
+
+class FcpAnimationOnByDefaultFalseStyle:
+    fcp_animation_on_by_default_false_fcp_mark_animation_true_style_rule: FcpAnimationOnByDefaultFalseFcpMarkAnimationTrueStyleRule
+
+    def __init__(self, fcp_animation_on_by_default_false_fcp_mark_animation_true_style_rule: FcpAnimationOnByDefaultFalseFcpMarkAnimationTrueStyleRule) -> None:
+        self.fcp_animation_on_by_default_false_fcp_mark_animation_true_style_rule = fcp_animation_on_by_default_false_fcp_mark_animation_true_style_rule
+
+
+class Preference:
+    name: str
+    value: int
+
+    def __init__(self, name: str, value: int) -> None:
+        self.name = name
+        self.value = value
+
+
+class Preferences:
+    preference: List[Preference]
+
+    def __init__(self, preference: List[Preference]) -> None:
+        self.preference = preference
+
+
+class Thumbnail:
+    height: int
+    name: str
+    width: int
+    text: str
+
+    def __init__(self, height: int, name: str, width: int, text: str) -> None:
+        self.height = height
+        self.name = name
+        self.width = width
+        self.text = text
+
+
+class Thumbnails:
+    thumbnail: List[Thumbnail]
+
+    def __init__(self, thumbnail: List[Thumbnail]) -> None:
+        self.thumbnail = thumbnail
+
+
+class Active:
+    id: int
+
+    def __init__(self, id: int) -> None:
+        self.id = id
+
+
+class EdgeName(Enum):
+    LEFT = "left"
+    RIGHT = "right"
+    TOP = "top"
+
+
+class Zoom:
+    type: str
+
+    def __init__(self, type: str) -> None:
+        self.type = type
+
+
+class StripElement:
+    card: Zoom
+    size: int
+
+    def __init__(self, card: Zoom, size: int) -> None:
+        self.card = card
+        self.size = size
+
+
+class CardClass:
+    pane_specification_id: int
+    param: str
+    type: str
+
+    def __init__(self, pane_specification_id: int, param: str, type: str) -> None:
+        self.pane_specification_id = pane_specification_id
+        self.param = param
+        self.type = type
+
+
+class PurpleStrip:
+    card: Union[List[Zoom], CardClass]
+    size: int
+
+    def __init__(self, card: Union[List[Zoom], CardClass], size: int) -> None:
+        self.card = card
+        self.size = size
+
+
+class Edge:
+    strip: Union[List[StripElement], PurpleStrip]
+    name: EdgeName
+
+    def __init__(self, strip: Union[List[StripElement], PurpleStrip], name: EdgeName) -> None:
+        self.strip = strip
+        self.name = name
+
+
+class Cards:
+    edge: List[Edge]
+
+    def __init__(self, edge: List[Edge]) -> None:
+        self.edge = edge
+
+
+class DevicePreview:
+    visible: bool
+
+    def __init__(self, visible: bool) -> None:
+        self.visible = visible
+
+
+class ColorOneWay:
+    field: str
+
+    def __init__(self, field: str) -> None:
+        self.field = field
+
+
+class Highlight:
+    color_one_way: ColorOneWay
+
+    def __init__(self, color_one_way: ColorOneWay) -> None:
+        self.color_one_way = color_one_way
+
+
+class WindowViewpoint:
+    highlight: Highlight
+
+    def __init__(self, highlight: Highlight) -> None:
+        self.highlight = highlight
+
+
+class Tuple:
+    value: List[str]
+
+    def __init__(self, value: List[str]) -> None:
+        self.value = value
+
+
+class TupleDescriptorColumns:
+    field: List[str]
+
+    def __init__(self, field: List[str]) -> None:
+        self.field = field
+
+
+class PaneDescriptor:
+    x_fields: ColorOneWay
+    y_fields: ColorOneWay
+
+    def __init__(self, x_fields: ColorOneWay, y_fields: ColorOneWay) -> None:
+        self.x_fields = x_fields
+        self.y_fields = y_fields
+
+
+class TupleDescriptor:
+    pane_descriptor: PaneDescriptor
+    columns: TupleDescriptorColumns
+
+    def __init__(self, pane_descriptor: PaneDescriptor, columns: TupleDescriptorColumns) -> None:
+        self.pane_descriptor = pane_descriptor
+        self.columns = columns
+
+
+class TupleReference:
+    tuple_descriptor: TupleDescriptor
+    tuple: Tuple
+
+    def __init__(self, tuple_descriptor: TupleDescriptor, tuple: Tuple) -> None:
+        self.tuple_descriptor = tuple_descriptor
+        self.tuple = tuple
+
+
+class TupleSelection:
+    tuple_reference: TupleReference
+
+    def __init__(self, tuple_reference: TupleReference) -> None:
+        self.tuple_reference = tuple_reference
+
+
+class SelectionCollection:
+    tuple_selection: TupleSelection
+
+    def __init__(self, tuple_selection: TupleSelection) -> None:
+        self.tuple_selection = tuple_selection
+
+
+class ViewpointsViewpoint:
+    selection_collection: Optional[SelectionCollection]
+    name: str
+    zoom: Optional[Zoom]
+
+    def __init__(self, selection_collection: Optional[SelectionCollection], name: str, zoom: Optional[Zoom]) -> None:
+        self.selection_collection = selection_collection
+        self.name = name
+        self.zoom = zoom
+
+
+class ViewpointsClass:
+    viewpoint: ViewpointsViewpoint
+
+    def __init__(self, viewpoint: ViewpointsViewpoint) -> None:
+        self.viewpoint = viewpoint
+
+
+class WindowClass(Enum):
+    DASHBOARD = "dashboard"
+    WORKSHEET = "worksheet"
+
+
+class Window:
+    viewpoints: Union[ViewpointsClass, None, str]
+    active: Optional[Active]
+    device_preview: Optional[DevicePreview]
+    simple_id: SimpleID
+    window_class: WindowClass
+    maximized: Optional[bool]
+    name: str
+    cards: Optional[Cards]
+    viewpoint: Optional[WindowViewpoint]
+
+    def __init__(self, viewpoints: Union[ViewpointsClass, None, str], active: Optional[Active], device_preview: Optional[DevicePreview], simple_id: SimpleID, window_class: WindowClass, maximized: Optional[bool], name: str, cards: Optional[Cards], viewpoint: Optional[WindowViewpoint]) -> None:
+        self.viewpoints = viewpoints
+        self.active = active
+        self.device_preview = device_preview
+        self.simple_id = simple_id
+        self.window_class = window_class
+        self.maximized = maximized
+        self.name = name
+        self.cards = cards
+        self.viewpoint = viewpoint
+
+
+class Windows:
+    window: List[Window]
+    source_height: int
+
+    def __init__(self, window: List[Window], source_height: int) -> None:
+        self.window = window
+        self.source_height = source_height
+
+
+class RunRun:
+    fontalignment: int
+    text: str
+
+    def __init__(self, fontalignment: int, text: str) -> None:
+        self.fontalignment = fontalignment
+        self.text = text
+
+
+class TitleFormattedText:
+    run: Union[RunRun, str]
+
+    def __init__(self, run: Union[RunRun, str]) -> None:
+        self.run = run
+
+
+class Title:
+    formatted_text: TitleFormattedText
+
+    def __init__(self, formatted_text: TitleFormattedText) -> None:
+        self.formatted_text = formatted_text
+
+
+class LayoutOptions:
+    title: Title
+
+    def __init__(self, title: Title) -> None:
+        self.title = title
+
+
+class Text:
+    column: str
+
+    def __init__(self, column: str) -> None:
+        self.column = column
+
+
+class Encodings:
+    text: Text
+    size: Optional[Text]
+    color: Optional[Text]
+
+    def __init__(self, text: Text, size: Optional[Text], color: Optional[Text]) -> None:
+        self.text = text
+        self.size = size
+        self.color = color
+
+
+class Mark:
+    mark_class: str
+
+    def __init__(self, mark_class: str) -> None:
+        self.mark_class = mark_class
+
+
+class MarkSizing:
+    mark_sizing_setting: str
+
+    def __init__(self, mark_sizing_setting: str) -> None:
+        self.mark_sizing_setting = mark_sizing_setting
+
+
+class PurpleStyleRule:
+    format: Union[List[FcpAnimationOnByDefaultFalseFormatElement], FcpAnimationOnByDefaultFalseFormatElement]
+    element: str
+
+    def __init__(self, format: Union[List[FcpAnimationOnByDefaultFalseFormatElement], FcpAnimationOnByDefaultFalseFormatElement], element: str) -> None:
+        self.format = format
+        self.element = element
+
+
+class PaneStyle:
+    style_rule: PurpleStyleRule
+
+    def __init__(self, style_rule: PurpleStyleRule) -> None:
+        self.style_rule = style_rule
+
+
+class AggregationClass:
+    value: str
+
+    def __init__(self, value: str) -> None:
+        self.value = value
+
+
+class PaneView:
+    breakdown: AggregationClass
+
+    def __init__(self, breakdown: AggregationClass) -> None:
+        self.breakdown = breakdown
+
+
+class Pane:
+    view: PaneView
+    mark: Mark
+    encodings: Optional[Encodings]
+    style: Optional[PaneStyle]
+    selection_relaxation_option: str
+    mark_sizing: Optional[MarkSizing]
+
+    def __init__(self, view: PaneView, mark: Mark, encodings: Optional[Encodings], style: Optional[PaneStyle], selection_relaxation_option: str, mark_sizing: Optional[MarkSizing]) -> None:
+        self.view = view
+        self.mark = mark
+        self.encodings = encodings
+        self.style = style
+        self.selection_relaxation_option = selection_relaxation_option
+        self.mark_sizing = mark_sizing
+
+
+class Panes:
+    pane: Pane
+
+    def __init__(self, pane: Pane) -> None:
+        self.pane = pane
+
+
+class Encoding:
+    attr: str
+    field: str
+    field_type: FieldTypeEnum
+    max_size: int
+    min_size: str
+    type: str
+
+    def __init__(self, attr: str, field: str, field_type: FieldTypeEnum, max_size: int, min_size: str, type: str) -> None:
+        self.attr = attr
+        self.field = field
+        self.field_type = field_type
+        self.max_size = max_size
+        self.min_size = min_size
+        self.type = type
+
+
+class FluffyStyleRule:
+    encoding: Encoding
+    element: str
+
+    def __init__(self, encoding: Encoding, element: str) -> None:
+        self.encoding = encoding
+        self.element = element
+
+
+class StyleStyle:
+    style_rule: FluffyStyleRule
+
+    def __init__(self, style_rule: FluffyStyleRule) -> None:
+        self.style_rule = style_rule
+
+
+class Derivation(Enum):
+    AVG = "Avg"
+    NONE = "None"
+
+
+class Pivot(Enum):
+    KEY = "key"
+
+
+class ColumnInstance:
+    column: str
+    derivation: Derivation
+    name: str
+    pivot: Pivot
+    type: FieldTypeEnum
+
+    def __init__(self, column: str, derivation: Derivation, name: str, pivot: Pivot, type: FieldTypeEnum) -> None:
+        self.column = column
+        self.derivation = derivation
+        self.name = name
+        self.pivot = pivot
+        self.type = type
+
+
+class DatasourceDependencies:
+    column: List[FcpObjectModelTableTypeTrueColumnElement]
+    column_instance: List[ColumnInstance]
+    datasource: str
+
+    def __init__(self, column: List[FcpObjectModelTableTypeTrueColumnElement], column_instance: List[ColumnInstance], datasource: str) -> None:
+        self.column = column
+        self.column_instance = column_instance
+        self.datasource = datasource
+
+
+class FluffyDatasource:
+    caption: str
+    name: str
+
+    def __init__(self, caption: str, name: str) -> None:
+        self.caption = caption
+        self.name = name
+
+
+class ViewDatasources:
+    datasource: FluffyDatasource
+
+    def __init__(self, datasource: FluffyDatasource) -> None:
+        self.datasource = datasource
+
+
+class ShelfSortV2:
+    dimension_to_sort: str
+    direction: str
+    is_on_innermost_dimension: bool
+    measure_to_sort_by: str
+    shelf: str
+
+    def __init__(self, dimension_to_sort: str, direction: str, is_on_innermost_dimension: bool, measure_to_sort_by: str, shelf: str) -> None:
+        self.dimension_to_sort = dimension_to_sort
+        self.direction = direction
+        self.is_on_innermost_dimension = is_on_innermost_dimension
+        self.measure_to_sort_by = measure_to_sort_by
+        self.shelf = shelf
+
+
+class ShelfSorts:
+    shelf_sort_v2: ShelfSortV2
+
+    def __init__(self, shelf_sort_v2: ShelfSortV2) -> None:
+        self.shelf_sort_v2 = shelf_sort_v2
+
+
+class TableView:
+    datasources: ViewDatasources
+    datasource_dependencies: DatasourceDependencies
+    aggregation: AggregationClass
+    shelf_sorts: Optional[ShelfSorts]
+
+    def __init__(self, datasources: ViewDatasources, datasource_dependencies: DatasourceDependencies, aggregation: AggregationClass, shelf_sorts: Optional[ShelfSorts]) -> None:
+        self.datasources = datasources
+        self.datasource_dependencies = datasource_dependencies
+        self.aggregation = aggregation
+        self.shelf_sorts = shelf_sorts
+
+
+class Table:
+    view: TableView
+    style: Union[StyleStyle, str]
+    panes: Panes
+    rows: str
+    cols: str
+
+    def __init__(self, view: TableView, style: Union[StyleStyle, str], panes: Panes, rows: str, cols: str) -> None:
+        self.view = view
+        self.style = style
+        self.panes = panes
+        self.rows = rows
+        self.cols = cols
+
+
+class Worksheet:
+    layout_options: LayoutOptions
+    table: Table
+    simple_id: SimpleID
+    name: str
+
+    def __init__(self, layout_options: LayoutOptions, table: Table, simple_id: SimpleID, name: str) -> None:
+        self.layout_options = layout_options
+        self.table = table
+        self.simple_id = simple_id
+        self.name = name
+
+
+class Worksheets:
+    worksheet: List[Worksheet]
+
+    def __init__(self, worksheet: List[Worksheet]) -> None:
+        self.worksheet = worksheet
+
+
+class Workbook:
+    document_format_change_manifest: DocumentFormatChangeManifest
+    preferences: Preferences
+    fcp_animation_on_by_default_false_style: FcpAnimationOnByDefaultFalseStyle
+    datasources: WorkbookDatasources
+    worksheets: Worksheets
+    dashboards: Dashboards
+    windows: Windows
+    thumbnails: Thumbnails
+    xmlns_user: str
+    original_version: str
+    source_build: str
+    source_platform: str
+    version: str
+
+    def __init__(self, document_format_change_manifest: DocumentFormatChangeManifest, preferences: Preferences, fcp_animation_on_by_default_false_style: FcpAnimationOnByDefaultFalseStyle, datasources: WorkbookDatasources, worksheets: Worksheets, dashboards: Dashboards, windows: Windows, thumbnails: Thumbnails, xmlns_user: str, original_version: str, source_build: str, source_platform: str, version: str) -> None:
+        self.document_format_change_manifest = document_format_change_manifest
+        self.preferences = preferences
+        self.fcp_animation_on_by_default_false_style = fcp_animation_on_by_default_false_style
+        self.datasources = datasources
+        self.worksheets = worksheets
+        self.dashboards = dashboards
+        self.windows = windows
+        self.thumbnails = thumbnails
+        self.xmlns_user = xmlns_user
+        self.original_version = original_version
+        self.source_build = source_build
+        self.source_platform = source_platform
+        self.version = version
+
+
+class Welcome7:
+    workbook: Workbook
+
+    def __init__(self, workbook: Workbook) -> None:
+        self.workbook = workbook
+
